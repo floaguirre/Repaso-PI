@@ -3,7 +3,9 @@ import Personajes from './Personajes'
 
 function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <Personajes />
+    </div>
   )
 }
 

@@ -3,7 +3,10 @@ import { AGREGAR_PERSONAJE,
         AGREGAR_PERSONAJE_ERROR,
         CARGAR_PERSONAJES,
         CARGAR_PERSONAJES_EXITO,
-        CARGAR_PERSONAJES_ERROR
+        CARGAR_PERSONAJES_ERROR,
+        CARGAR_EPISODIOS,
+        CARGAR_EPISODIOS_EXITO,
+        CARGAR_EPISODIOS_ERROR
 } from "./types";  
 
 import clienteAxios from "../config/axios";
@@ -75,3 +78,39 @@ const cargarPersonajesError = () => ({
     type: CARGAR_PERSONAJES_ERROR,
     payload: true
 })
+
+/***************************** */
+//TRAER EPISODIOS
+
+export function cargarEpisodiosAction () {
+    return async (dispatch) => {
+        dispatch(cargarEpisodios());
+
+        try {
+            const respuesta = await clienteAxios.get('/episodes');
+            dispatch(cargarEpisodiosExito(respuesta.data));
+            
+        } catch (error) {
+            dispatch(cargarEpisodiosError(error));
+            
+        }
+    }
+}
+
+const cargarEpisodios = () => ({
+    type: CARGAR_EPISODIOS,
+    payload: true
+
+})
+
+const cargarEpisodiosExito = (episodios) => ({
+    type: CARGAR_EPISODIOS_EXITO,
+    payload: episodios
+})
+
+const cargarEpisodiosError = () => ({
+    type: CARGAR_EPISODIOS_ERROR,
+    payload: true
+})
+
+

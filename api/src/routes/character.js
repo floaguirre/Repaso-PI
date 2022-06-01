@@ -9,7 +9,7 @@ const router = Router();
 // Crea un personaje en la base de datos
 router.post('/' , async (req, res, next) => {
     try {
-        const {name, species, origin, image, created} = req.body;
+        const {name, species, origin, image, created, episodes} = req.body;
         const newCharacter = await Character.create({
             name,
             species,
@@ -17,6 +17,8 @@ router.post('/' , async (req, res, next) => {
             image, 
             created
         })
+        await newCharacter.addEpisode(episodes)
+
         res.status(201).send(newCharacter);
 
         
@@ -38,7 +40,7 @@ router.post('/:characterId/episodes/:episodeId', async (req, res, next) => {
         res.send(200)
         
     } catch (error) {
-        
+        next(error);
     }
 })
 

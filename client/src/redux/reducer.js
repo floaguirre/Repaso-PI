@@ -3,10 +3,14 @@ import { AGREGAR_PERSONAJE,
     AGREGAR_PERSONAJE_ERROR,
     CARGAR_PERSONAJES,
     CARGAR_PERSONAJES_EXITO,
-    CARGAR_PERSONAJES_ERROR
+    CARGAR_PERSONAJES_ERROR,
+    CARGAR_EPISODIOS,
+    CARGAR_EPISODIOS_EXITO,
+    CARGAR_EPISODIOS_ERROR
 } from "./types";  
 const initialState = {
     personajes: [],
+    episodios: [],
     error: false,
     loading: false
 
@@ -14,6 +18,8 @@ const initialState = {
 
 export default function rootReducer(state = initialState, action) {
     switch(action.type) {
+        case CARGAR_EPISODIOS:
+        case CARGAR_PERSONAJES:
         case AGREGAR_PERSONAJE:
             return {
                 ...state,
@@ -25,11 +31,28 @@ export default function rootReducer(state = initialState, action) {
                 loading: false,
                 personajes : [...state.personajes, action.payload]
             }
+        case CARGAR_EPISODIOS_ERROR:
+        case CARGAR_PERSONAJES_ERROR:
         case AGREGAR_PERSONAJE_ERROR:
             return {
                 ...state,
                 error: action.payload
             }
+        case CARGAR_PERSONAJES_EXITO:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                personajes: action.payload
+            }
+        case CARGAR_EPISODIOS_EXITO:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                episodios: action.payload
+            }
+        
     
 
         default:
