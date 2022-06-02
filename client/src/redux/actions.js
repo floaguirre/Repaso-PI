@@ -21,7 +21,8 @@ export function crearNuevoPersonajeAction(personaje) {
             dispatch(agregarPersonajeExito(personaje))
             
         } catch (error) {
-            dispatch(agregarPersonajeError(true))
+            console.log('error', error)
+            dispatch(agregarPersonajeError())
             
         }
         

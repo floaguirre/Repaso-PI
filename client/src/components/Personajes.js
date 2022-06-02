@@ -23,7 +23,8 @@ function Personajes() {
 
 
   return (
-    <div>
+    <div className='container'>
+    <div className='row mt-5'>
       {personajes.length === 0 ? 'No hay personajes' : (
         personajes.map(personaje => (
           <Card 
@@ -33,6 +34,7 @@ function Personajes() {
         ))
 
       )}
+    </div>
     </div>
   )
 }

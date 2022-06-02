@@ -8,8 +8,12 @@ const axios = require('axios');
 // Dicha función nos cargaría todos los personajes en nuestra DB una vez que se inicia el servidor. 
 //Tener en cuenta que como es un pedido a la API, debería ser asíncrona.
 
-function  getEpisodes() {
-  axios.get('http://localhost:3001/api/episodes');
+async function getEpisodes() {
+  
+  await axios.get('http://localhost:3001/api/episodes');
+    
+  
+  
 
 }
 

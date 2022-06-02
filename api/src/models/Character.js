@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       
     },
-    origin: {
+    origen: {
       type: DataTypes.STRING,
 
     },
@@ -31,7 +31,8 @@ module.exports = (sequelize) => {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
       
-    }
+    },
+    
 
   },
   {

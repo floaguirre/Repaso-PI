@@ -1,4 +1,4 @@
-const {Character} = require('../db');
+const {Character, Episode} = require('../db');
 const { Router} = require('express');
 const axios = require('axios');
 
@@ -11,7 +11,10 @@ const router = Router();
 router.get('/' , (req, res, next) => {
     try {
         const charactersApi = axios.get(`https://rickandmortyapi.com/api/character`);
-        const charactersDb = Character.findAll();
+        const charactersDb = Character.findAll({
+            
+            include: {model: Episode}
+        });
 
         Promise.all([charactersApi, charactersDb]).then((respuesta) => {
             const [charactersApi, charactersDb] = respuesta;

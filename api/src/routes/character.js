@@ -17,7 +17,11 @@ router.post('/' , async (req, res, next) => {
             image, 
             created
         })
-        await newCharacter.addEpisode(episodes)
+        
+        episodes.map(async (e) => (
+            await newCharacter.addEpisode(e)
+        ))
+        
 
         res.status(201).send(newCharacter);
 

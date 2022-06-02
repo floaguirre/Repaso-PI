@@ -7,15 +7,17 @@ function NuevoPersonaje() {
   //state del componente
   const [name, setName] = useState("");
   const [origen, setOrigen] = useState("");
-  const [especie, setEspecie] = useState("");
-  const [imagen, setImagen] = useState("");
-  const [episodios, setEpisodios] = useState([]);
+  const [species, setEspecie] = useState("");
+  const [image, setImagen] = useState("");
+  const [episodes, setEpisodios] = useState([]);
+  
+  
 
   const dispatch = useDispatch();
 
   const episodiosApi = useSelector(state => state.episodios);
 
-  console.log(episodiosApi);
+  
 
   
 
@@ -24,6 +26,7 @@ function NuevoPersonaje() {
     cargarEpisodios();
   }, [])
 
+  
 
   const agregarPersonaje = (personaje) =>
     dispatch(crearNuevoPersonajeAction(personaje));
@@ -34,8 +37,9 @@ function NuevoPersonaje() {
     agregarPersonaje({
       name,
       origen,
-      especie,
-      imagen,
+      species,
+      image,
+      episodes
 
     })
   }
@@ -81,7 +85,7 @@ function NuevoPersonaje() {
                       className="form-control"
                       placeholder="Especie"
                       name="especie"
-                      value={especie}
+                      value={species}
                       onChange={(e) => setEspecie(e.target.value)}
                     />
                   </div>
@@ -92,7 +96,7 @@ function NuevoPersonaje() {
                       className="form-control"
                       placeholder="Imagen"
                       name="imagen"
-                      value={imagen}
+                      value={image}
                       onChange={(e) => setImagen(e.target.value)}
                     />
                   </div>
@@ -101,14 +105,16 @@ function NuevoPersonaje() {
                     <select
                       className="form-control"
                       name='episodios'
+                      onChange={(e) => setEpisodios([...episodes, e.target.value])}
                       
                       
                     >
                       <option value=''>--Seleccione --</option>
                       {episodiosApi.map(episodio => (
-                        <option key={episodio.id}>{episodio.name}</option>
+                        <option key={episodio.id} value={episodio.id}>{episodio.name}</option>
                       ))}
                     </select>
+                    
                   </div>
                   <button type="submit" className="mt-5 btn btn-primary font-weight-bold text-uppercase d-block w-100">Agregar</button>
                 </form>
