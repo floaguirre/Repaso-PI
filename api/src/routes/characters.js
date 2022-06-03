@@ -9,30 +9,65 @@ const router = Router();
 // Debe devolver solo los datos necesarios para la ruta principal
 
 router.get('/' , (req, res, next) => {
+    
     try {
-        const charactersApi = axios.get(`https://rickandmortyapi.com/api/character`);
-        const charactersDb = Character.findAll({
+        const {page} = req.query;
+        
+        
+        
+        if(page){
+            const charactersApi = axios.get(`https://rickandmortyapi.com/api/character/?page=${page}`);
+            const charactersDb = Character.findAll({
             
-            include: {model: Episode}
-        });
-
-        Promise.all([charactersApi, charactersDb]).then((respuesta) => {
-            const [charactersApi, charactersDb] = respuesta;
-            console.log(charactersApi)
-
-            const filterCharacterApi = charactersApi.data.results.map((c) => {
-                return {
-                    id: c.id,
-                    name: c.name,
-                    image: c.image,
-                    species: c.species,
-                    origen: c.origin.name,
-                    episodes: c.episode
-                }
+                include: {model: Episode}
             });
-            const allCharacters = [...filterCharacterApi, ...charactersDb];
-            res.status(200).send(allCharacters.length? allCharacters : 'No Character Found')
-        });
+    
+            Promise.all([charactersApi, charactersDb]).then((respuesta) => {
+                const [charactersApi, charactersDb] = respuesta;
+                console.log(charactersApi)
+    
+                const filterCharacterApi = charactersApi.data.results.map((c) => {
+                    return {
+                        id: c.id,
+                        name: c.name,
+                        image: c.image,
+                        species: c.species,
+                        origen: c.origin.name,
+                        episodes: c.episode
+                    }
+                });
+                const allCharacters = [...filterCharacterApi, ...charactersDb];
+                res.status(200).send(allCharacters.length? allCharacters : 'No Character Found')
+            });
+
+        }else{
+            const charactersApi = axios.get(`https://rickandmortyapi.com/api/character`);
+            const charactersDb = Character.findAll({
+            
+                include: {model: Episode}
+            });
+    
+            Promise.all([charactersApi, charactersDb]).then((respuesta) => {
+                const [charactersApi, charactersDb] = respuesta;
+                console.log(charactersApi)
+    
+                const filterCharacterApi = charactersApi.data.results.map((c) => {
+                    return {
+                        id: c.id,
+                        name: c.name,
+                        image: c.image,
+                        species: c.species,
+                        origen: c.origin.name,
+                        episodes: c.episode
+                    }
+                });
+                const allCharacters = [...filterCharacterApi, ...charactersDb];
+                res.status(200).send(allCharacters.length? allCharacters : 'No Character Found')
+            });
+        }
+
+        
+        
         
     } catch (error) {
         next(error)

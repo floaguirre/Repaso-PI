@@ -11,6 +11,8 @@ import { AGREGAR_PERSONAJE,
 const initialState = {
     personajes: [],
     episodios: [],
+    cantidadPersonajesTotal : 0,
+    episodiosCargados: false,
     error: false,
     loading: false
 
@@ -29,6 +31,7 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
+                cantidadPersonajesTotal: state.cantidadPersonajesTotal + 1,
                 personajes : [...state.personajes, action.payload]
             }
         case CARGAR_EPISODIOS_ERROR:
@@ -43,6 +46,8 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 loading: false,
                 error: null,
+                cantidadPersonajesTotal: action.payload.length,
+                episodiosCargados: true,
                 personajes: action.payload
             }
         case CARGAR_EPISODIOS_EXITO:

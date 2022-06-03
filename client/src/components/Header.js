@@ -6,7 +6,7 @@ function Header() {
     <Fragment>
         <nav className='navbar navbar-expand-lg navbar-dark bg-primary justify-content-between'>
             <div className='container'>
-                <h1><Link to={'/'} className='text-light'>RICK Y MORTY APP</Link></h1>
+                <h1><Link to={'/'} className='text-light'>RICK &#38; MORTY APP</Link></h1>
 
             </div>
             <Link to='/personaje/nuevo' className='btn btn-danger nuevo-post d-block d-md-inline-block'>Agregar Personaje &#43; </Link>

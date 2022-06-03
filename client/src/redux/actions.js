@@ -11,6 +11,8 @@ import { AGREGAR_PERSONAJE,
 
 import clienteAxios from "../config/axios";
 
+
+
 export function crearNuevoPersonajeAction(personaje) {
     return async (dispatch) => {
         dispatch( agregarPersonaje())
@@ -45,6 +47,7 @@ const agregarPersonajeError = () => ({
     type: AGREGAR_PERSONAJE_ERROR,
     payload: true
 })
+
 
 /**************************** */
 //cargar todos los personajes
